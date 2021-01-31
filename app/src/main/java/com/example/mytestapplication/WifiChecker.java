@@ -13,9 +13,9 @@ public class WifiChecker {
         WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         if (wifiManager.isWifiEnabled()) { // Wi-Fi adapter is ON
             WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-            if (wifiInfo.getNetworkId() == -1){
+            /*if (wifiInfo.getNetworkId() == -1){
                 return false; // Not connected to an access point
-            }
+            }*/
             return true; // Connected to an access point
         }
         else {

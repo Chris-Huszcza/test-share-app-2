@@ -14,7 +14,7 @@ public class Stock {
     private static final String PRICE_SELECTOR = "span.IsqQVc.NprOob.XcVN5d";
     private static final String PRICE_DIFF_SELECTOR = "span.WlRRw.IsqQVc";
     private static final String DATE_TIME_SELECTOR = "span[jsname$=ihIZgd]";
-    private String price;
+    private double price;
     private String priceDiff;
     private String dateTime;
 
@@ -30,10 +30,10 @@ public class Stock {
     }
 
     private void setPrice(Document doc) throws Exception {
-        this.price = getTextOfFirstElementBySelector(doc, PRICE_SELECTOR);
+        this.price = Double.parseDouble(getTextOfFirstElementBySelector(doc, PRICE_SELECTOR));
     }
 
-    public String getPrice() {
+    public double getPrice() {
         return this.price;
     }
 
