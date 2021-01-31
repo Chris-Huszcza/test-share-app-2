@@ -2,12 +2,15 @@ package com.example.mytestapplication;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.mytestapplication.services.CheckStockService;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,5 +36,13 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void startService(View view) {
+        startService(new Intent(getBaseContext(), CheckStockService.class));
+    }
+
+    public void stopService(View view) {
+        stopService(new Intent(getBaseContext(), CheckStockService.class));
     }
 }
