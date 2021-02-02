@@ -30,4 +30,8 @@ public class AlarmHelper {
     public void stopAlarm() {
         alarmManager.cancel(pendingIntent);
     }
+
+    public PendingIntent getPendingIntent() {
+        return this.pendingIntent;
+    }
 }
