@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 calendar.get(Calendar.SECOND + 4));
 
         //setAlarm(calendar.getTimeInMillis());
-        alarmHelper.setAlarm(calendar.getTimeInMillis());
+        alarmHelper.setAlarm();//calendar.getTimeInMillis());
         Toast.makeText(this, "Alarm started", Toast.LENGTH_LONG).show();
     }
 
