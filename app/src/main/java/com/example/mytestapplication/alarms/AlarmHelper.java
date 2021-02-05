@@ -4,10 +4,6 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.widget.Toast;
-
-import com.example.mytestapplication.stocks.CheckStockAlarm;
 
 import java.util.Calendar;
 
@@ -17,6 +13,8 @@ public class AlarmHelper {
     private PendingIntent pendingIntent;
     private final AlarmManager alarmManager;
     private final Context context;
+    private static final String CHECK_STOCK_ALARM =
+            "com.example.mytestapplication.alarms.CheckStockAlarm";
 
     public AlarmHelper(Context context) {
         this.context = context;
@@ -27,7 +25,7 @@ public class AlarmHelper {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.SECOND, 2);
 
-        intent = new Intent("com.example.mytestapplication.stocks.CheckStockAlarm");
+        intent = new Intent(CHECK_STOCK_ALARM);
 
         pendingIntent = PendingIntent.getBroadcast(context, 0, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
@@ -37,7 +35,7 @@ public class AlarmHelper {
     }
 
     public void stopAlarm() {
-        Intent intent = new Intent("com.example.mytestapplication.stocks.CheckStockAlarm");
+        Intent intent = new Intent(CHECK_STOCK_ALARM);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManager.cancel(pendingIntent);

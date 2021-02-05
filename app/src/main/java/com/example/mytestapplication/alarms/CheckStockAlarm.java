@@ -1,4 +1,4 @@
-package com.example.mytestapplication.stocks;
+package com.example.mytestapplication.alarms;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.example.mytestapplication.R;
+import com.example.mytestapplication.stocks.Stock;
 
 public class CheckStockAlarm extends BroadcastReceiver {
 
