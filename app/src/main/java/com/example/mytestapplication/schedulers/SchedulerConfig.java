@@ -22,4 +22,12 @@ public class SchedulerConfig {
     public Interval getInterval() {
         return this.interval;
     }
+
+    public Time24Hour getStartTime() {
+        return this.startTime;
+    }
+
+    public Time24Hour getEndTime() {
+        return this.endTime;
+    }
 }
