@@ -29,8 +29,16 @@ public class Stock {
         setDateTime(doc);
     }
 
+    public String getStockCode() {
+        return this.stockCode;
+    }
+
     private void setPrice(Document doc) throws Exception {
-        this.price = Double.parseDouble(getTextOfFirstElementBySelector(doc, PRICE_SELECTOR));
+        setPrice(Double.parseDouble(getTextOfFirstElementBySelector(doc, PRICE_SELECTOR)));
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public double getPrice() {
