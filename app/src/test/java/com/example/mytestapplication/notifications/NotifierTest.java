@@ -1,4 +1,4 @@
-package com.example.mytestapplication;
+package com.example.mytestapplication.notifications;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -7,12 +7,9 @@ import android.os.Bundle;
 
 import androidx.test.core.app.ApplicationProvider;
 
-import com.example.mytestapplication.notifications.Notifier;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.Shadows;
@@ -22,8 +19,6 @@ import org.robolectric.shadows.ShadowNotificationManager;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 
 @Config(

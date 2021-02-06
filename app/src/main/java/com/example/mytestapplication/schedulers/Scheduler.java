@@ -10,6 +10,10 @@ public class Scheduler {
     private final SchedulerConfig schedulerConfig;
     private Calendar time;
 
+    public Scheduler() {
+        this.schedulerConfig = new SchedulerConfig();
+    }
+
     public Scheduler(SchedulerConfig alarmConfig) {
         this.schedulerConfig = alarmConfig;
     }

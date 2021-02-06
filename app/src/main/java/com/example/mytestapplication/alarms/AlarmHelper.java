@@ -5,12 +5,15 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 
+import com.example.mytestapplication.schedulers.Scheduler;
+
 import java.util.Calendar;
 
 public class AlarmHelper {
 
     private Intent intent;
     private PendingIntent pendingIntent;
+    private Scheduler scheduler;
     private final AlarmManager alarmManager;
     private final Context context;
     private static final String CHECK_STOCK_ALARM =
@@ -19,11 +22,11 @@ public class AlarmHelper {
     public AlarmHelper(Context context) {
         this.context = context;
         this.alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        this.scheduler = new Scheduler();
     }
 
     public void setAlarm() {
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.SECOND, 2);
+        Calendar nextEventTime = scheduler.getNextEventTime(Calendar.getInstance());
 
         intent = new Intent(CHECK_STOCK_ALARM);
 
@@ -31,7 +34,7 @@ public class AlarmHelper {
                 PendingIntent.FLAG_UPDATE_CURRENT);
 
         alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,
-                calendar.getTimeInMillis(), pendingIntent);
+                nextEventTime.getTimeInMillis(), pendingIntent);
     }
 
     public void stopAlarm() {

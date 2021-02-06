@@ -9,7 +9,7 @@ import com.example.mytestapplication.R;
 
 public class Notifier {
 
-    private Notification.Builder builder;
+    private final Notification.Builder builder;
     private final Context context;
     public static final String CHANNEL_ID = "stock_channel_01";
     private static final String NOTIFICATION_TITLE = "MNZS Stock Price";

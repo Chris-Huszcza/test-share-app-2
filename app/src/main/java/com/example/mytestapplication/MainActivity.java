@@ -17,11 +17,7 @@ import com.example.mytestapplication.alarms.AlarmHelper;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView text;
-    Button refreshTextBtn;
-    Constraints constraints;
-    WorkRequest workRequest;
-    AlarmHelper alarmHelper;
+    private AlarmHelper alarmHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,38 +27,13 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        Context applicationContext = getApplicationContext();
-
-        text = findViewById(R.id.textView);
-
         alarmHelper = new AlarmHelper(getApplicationContext());
     }
 
     public void startService(View view) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH),
-                calendar.get(Calendar.HOUR),
-                calendar.get(Calendar.MINUTE),
-                calendar.get(Calendar.SECOND + 4));
-
-        //setAlarm(calendar.getTimeInMillis());
-        alarmHelper.setAlarm();//calendar.getTimeInMillis());
+        alarmHelper.setAlarm();
         Toast.makeText(this, "Alarm started", Toast.LENGTH_LONG).show();
     }
-
-    /*private void setAlarm(long timeInMillis) {
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(this, CheckStockAlarm.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
-        // 1000 milliseconds * 60 seconds * 1 minutes = 60,000
-        long interval = 60000L;
-        alarmManager.setRepeating(AlarmManager.RTC, timeInMillis, interval, pendingIntent);
-
-        Toast.makeText(this, "Alarm is set", Toast.LENGTH_SHORT).show();
-
-    }*/
 
     public void stopService(View view) {
         alarmHelper.stopAlarm();
