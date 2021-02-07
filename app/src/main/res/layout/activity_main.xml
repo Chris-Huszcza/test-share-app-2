@@ -6,35 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="MNZS Share Price: "
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.468"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="136dp"
-        android:layout_marginBottom="280dp"
-        android:text="Refresh"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <Button
         android:id="@+id/startServiceBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="139dp"
-        android:layout_marginBottom="216dp"
-        android:text="Start Service"
+        android:layout_marginStart="136dp"
+        android:layout_marginBottom="440dp"
         android:onClick="startService"
+        android:text="Start Service"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -42,10 +21,10 @@
         android:id="@+id/stopServiceBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="139dp"
-        android:layout_marginBottom="149dp"
-        android:text="StopService"
+        android:layout_marginStart="136dp"
+        android:layout_marginBottom="364dp"
         android:onClick="stopService"
+        android:text="StopService"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
