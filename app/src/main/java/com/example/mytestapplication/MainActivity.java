@@ -36,7 +36,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void stopService(View view) {
+        // Stop alarms
         alarmHelper.stopAlarm();
         Toast.makeText(this, "Alarm stopped", Toast.LENGTH_LONG).show();
+        // Clear shared prefernces
     }
 }
