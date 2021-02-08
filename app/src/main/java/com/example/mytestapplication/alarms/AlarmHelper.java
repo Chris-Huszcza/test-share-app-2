@@ -18,6 +18,7 @@ public class AlarmHelper {
     private final Context context;
     private static final String CHECK_STOCK_ALARM =
             "com.example.mytestapplication.alarms.CheckStockAlarm";
+    private Calendar nextEventTime;
 
     public AlarmHelper(Context context) {
         this.context = context;
@@ -26,7 +27,7 @@ public class AlarmHelper {
     }
 
     public void setAlarm() {
-        Calendar nextEventTime = scheduler.getNextEventTime(Calendar.getInstance());
+        nextEventTime = scheduler.getNextEventTime(Calendar.getInstance());
 
         intent = new Intent(CHECK_STOCK_ALARM);
 
@@ -35,6 +36,10 @@ public class AlarmHelper {
 
         alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP,
                 nextEventTime.getTimeInMillis(), pendingIntent);
+    }
+
+    public Calendar getNextEventTime() {
+        return this.nextEventTime;
     }
 
     public void stopAlarm() {

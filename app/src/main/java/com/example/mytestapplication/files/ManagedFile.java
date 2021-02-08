@@ -16,9 +16,13 @@ public class ManagedFile extends File {
 
     private final Context context;
 
-    public ManagedFile(Context context, String filename) {
+    public ManagedFile(Context context, String filename) throws IOException {
         super(context.getFilesDir(), filename);
         this.context = context;
+        // Create file if it does not exist
+        if (!this.exists()) {
+            this.createNewFile();
+        }
     }
 
     public void write(String string) {
