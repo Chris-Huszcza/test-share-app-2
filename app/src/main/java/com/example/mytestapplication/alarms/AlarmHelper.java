@@ -39,6 +39,9 @@ public class AlarmHelper {
     }
 
     public Calendar getNextEventTime() {
+        if (this.nextEventTime == null) {
+            throw new IllegalStateException("Next event time is null");
+        }
         return this.nextEventTime;
     }
 

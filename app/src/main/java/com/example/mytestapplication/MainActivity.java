@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mytestapplication.alarms.AlarmHelper;
+import com.example.mytestapplication.stocks.Stock;
 
 import java.util.Calendar;
 
@@ -52,8 +53,27 @@ public class MainActivity extends AppCompatActivity {
 
     public void refreshInfo(View view) {
         TextView textView = (TextView)findViewById(R.id.textView);
-        Calendar nextEventTime = alarmHelper.getNextEventTime();
-        String alarmTime = nextEventTime.getTime().toGMTString();
+        String alarmTime;
+        try {
+            Calendar nextEventTime = alarmHelper.getNextEventTime();
+            alarmTime = nextEventTime.getTime().toGMTString();
+        } catch (IllegalStateException ex) {
+            alarmTime = "No alarm set.";
+        }
         textView.setText("Next Alarm is set for: " + alarmTime);
+    }
+
+    public void getStockInfo(View view) {
+        TextView textView = (TextView)findViewById(R.id.textView);
+        String stockValue;
+        try {
+            Stock mnzsStock = new Stock("MNZS");
+            mnzsStock.refreshStockData();
+            stockValue = String.valueOf(mnzsStock.getPrice());
+        }
+        catch (Exception ex) {
+            stockValue = "Exception when trying to get stock value";
+        }
+        textView.setText("MNZS price = " + stockValue);
     }
 }

@@ -14,7 +14,7 @@ public class Stock {
     private static final String PRICE_SELECTOR = "span.IsqQVc.NprOob.XcVN5d";
     private static final String PRICE_DIFF_SELECTOR = "span.WlRRw.IsqQVc";
     private static final String DATE_TIME_SELECTOR = "span[jsname$=ihIZgd]";
-    private double price;
+    private Double price;
     private String priceDiff;
     private String dateTime;
 
@@ -22,7 +22,8 @@ public class Stock {
         this.stockCode = stockCode;
     }
 
-    public void refreshStockData() throws IOException, Exception {
+    public void refreshStockData() throws Exception {
+        System.out.println("Connecting to " + SHARE_PRICE_URL_PREFIX + this.stockCode);
         Document doc = Jsoup.connect(SHARE_PRICE_URL_PREFIX + this.stockCode).get();
         setPrice(doc);
         setPriceDiff(doc);
@@ -37,7 +38,7 @@ public class Stock {
         setPrice(Double.parseDouble(getTextOfFirstElementBySelector(doc, PRICE_SELECTOR)));
     }
 
-    public void setPrice(double price) {
+    public void setPrice(double price) throws Exception {
         this.price = price;
     }
 

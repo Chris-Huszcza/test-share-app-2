@@ -17,7 +17,7 @@ public class StockComparatorTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testDifferentStockCodes() {
+    public void testDifferentStockCodes() throws Exception {
         Stock mnzsStock = new Stock("MNZS");
         mnzsStock.setPrice(100.0);
         Stock cardStock = new Stock("CARD");
@@ -26,7 +26,7 @@ public class StockComparatorTest {
     }
 
     @Test
-    public void testLowerPrice() {
+    public void testLowerPrice() throws Exception {
         Stock stock1 = new Stock("MNZS");
         stock1.setPrice(99.9);
         Stock stock2 = new Stock("MNZS");
@@ -35,7 +35,7 @@ public class StockComparatorTest {
     }
 
     @Test
-    public void testHigherPrice() {
+    public void testHigherPrice() throws Exception {
         Stock stock1 = new Stock("MNZS");
         stock1.setPrice(100.1);
         Stock stock2 = new Stock("MNZS");
@@ -44,7 +44,7 @@ public class StockComparatorTest {
     }
 
     @Test
-    public void testEqualPrice() {
+    public void testEqualPrice() throws Exception {
         Stock stock1 = new Stock("MNZS");
         stock1.setPrice(100.0);
         Stock stock2 = new Stock("MNZS");
@@ -53,7 +53,7 @@ public class StockComparatorTest {
     }
 
     @Test
-    public void testEquals() {
+    public void testEquals() throws Exception {
         Stock stock1 = new Stock("MNZS");
         stock1.setPrice(100.0);
         Stock stock2 = new Stock("MNZS");
@@ -62,7 +62,7 @@ public class StockComparatorTest {
     }
 
     @Test
-    public void testNotEquals() {
+    public void testNotEquals() throws Exception {
         Stock stock1 = new Stock("MNZS");
         stock1.setPrice(99.9);
         Stock stock2 = new Stock("MNZS");
