@@ -40,12 +40,13 @@ public class AlarmHelper {
                 nextEventTime.getTimeInMillis(), pendingIntent);
     }
 
-    public Calendar getNextEventTime() {
+    // TODO implement this method after converting this class to a singlton
+    /*public Calendar getNextEventTime() {
         if (this.nextEventTime == null) {
             throw new IllegalStateException("Next event time is null");
         }
         return this.nextEventTime;
-    }
+    }*/
 
     public void stopAlarm(Context context) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);

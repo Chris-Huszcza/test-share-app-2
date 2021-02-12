@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         // Clear shared preferences
     }
 
+    /* Implement this method after turning AlarmHelper into a singleton
     public void refreshInfo(View view) {
         TextView textView = (TextView)findViewById(R.id.textView);
         String alarmTime;
@@ -62,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
             alarmTime = "No alarm set.";
         }
         textView.setText("Next Alarm is set for: " + alarmTime);
-    }
+    }*/
 
     public void getStockInfo(View view) {
         TextView textView = (TextView)findViewById(R.id.textView);
@@ -76,10 +77,5 @@ public class MainActivity extends AppCompatActivity {
             stockValue = "Exception when trying to get stock value";
         }
         textView.setText("MNZS price = " + stockValue);
-    }
-
-    public void checkStockAndNotify(View view) {
-        CheckStockBroadcastReceiver checkStockBroadcastReceiver = new CheckStockBroadcastReceiver();
-        checkStockBroadcastReceiver.checkStockAndNotify(getApplicationContext());
     }
 }
