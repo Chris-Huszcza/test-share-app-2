@@ -14,22 +14,24 @@ public class AlarmHelper {
     private Intent intent;
     private PendingIntent pendingIntent;
     private Scheduler scheduler;
-    private final AlarmManager alarmManager;
-    private final Context context;
     private static final String CHECK_STOCK_ALARM =
-            "com.example.mytestapplication.alarms.CheckStockAlarm";
+            "com.example.mytestapplication.alarms.CheckStockBroadcastReceiver";
     private Calendar nextEventTime;
 
-    public AlarmHelper(Context context) {
-        this.context = context;
-        this.alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+    public AlarmHelper() {
         this.scheduler = new Scheduler();
     }
 
-    public void setAlarm() {
+    public AlarmHelper(Scheduler scheduler) {
+        this.scheduler = scheduler;
+    }
+
+    public void setAlarm(Context context) throws ClassNotFoundException {
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
         nextEventTime = scheduler.getNextEventTime(Calendar.getInstance());
 
-        intent = new Intent(CHECK_STOCK_ALARM);
+        intent = new Intent(context, CheckStockBroadcastReceiver.class);
 
         pendingIntent = PendingIntent.getBroadcast(context, 0, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
@@ -45,8 +47,9 @@ public class AlarmHelper {
         return this.nextEventTime;
     }
 
-    public void stopAlarm() {
-        Intent intent = new Intent(CHECK_STOCK_ALARM);
+    public void stopAlarm(Context context) {
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
         alarmManager.cancel(pendingIntent);
@@ -59,9 +62,5 @@ public class AlarmHelper {
 
     public PendingIntent getPendingIntent() {
         return this.pendingIntent;
-    }
-
-    public AlarmManager getAlarmManager() {
-        return this.alarmManager;
     }
 }

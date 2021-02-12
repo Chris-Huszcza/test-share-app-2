@@ -19,7 +19,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(RobolectricTestRunner.class)
-public class CheckStockAlarmTest {
+public class CheckStockBroadcastReceiverTest {
 
     private ShadowNotificationManager shadowNotificationManager;
     private final Context context = ApplicationProvider.getApplicationContext();
@@ -39,11 +39,12 @@ public class CheckStockAlarmTest {
         int preNotifs = shadowNotificationManager.getAllNotifications().size();
         assertEquals(0, preNotifs);
 
-        CheckStockAlarm checkStockAlarm = new CheckStockAlarm();
-        Intent intent = new Intent(CHECK_STOCK_ALARM);
-        checkStockAlarm.onReceive(context, intent);
+        // Trigger the onReceive method
+        CheckStockBroadcastReceiver checkStockBroadcastReceiver = new CheckStockBroadcastReceiver();
+        Intent intent = new Intent(context, CheckStockBroadcastReceiver.class);
+        checkStockBroadcastReceiver.onReceive(context, intent);
 
-        // Check there is an alarm registered
+        // Check there is a new alarm registered
         boolean alarmUp = (PendingIntent.getBroadcast(context, 0,
                 intent,
                 PendingIntent.FLAG_NO_CREATE) != null);
@@ -55,13 +56,16 @@ public class CheckStockAlarmTest {
     }
 
     @Test
-    public void testWithMockContext() {
-        MockContext mockContext = new MockContext();
-        //mockContext.
-    }
+    public void testCheckStockAndNotify() {
+        // Check there are no notifications
+        int preNotifs = shadowNotificationManager.getAllNotifications().size();
+        assertEquals(0, preNotifs);
 
-    @Test
-    public void testCheckStock() {
+        CheckStockBroadcastReceiver checkStockBroadcastReceiver = new CheckStockBroadcastReceiver();
+        checkStockBroadcastReceiver.checkStockAndNotify(context);
 
+        // Check there was a notification
+        int postNotifs = shadowNotificationManager.getAllNotifications().size();
+        assertEquals(1, postNotifs);
     }
 }

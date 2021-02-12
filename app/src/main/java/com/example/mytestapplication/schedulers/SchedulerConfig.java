@@ -8,8 +8,8 @@ import java.util.Calendar;
 public class SchedulerConfig {
 
     private Interval interval = new Interval(Calendar.MINUTE, 15);
-    private Time24Hour startTime = new Time24Hour(8, 0);
-    private Time24Hour endTime = new Time24Hour(16, 30);
+    private final Time24Hour startTime = new Time24Hour(8, 0);
+    private final Time24Hour endTime = new Time24Hour(16, 30);
 
     public SchedulerConfig() {
 

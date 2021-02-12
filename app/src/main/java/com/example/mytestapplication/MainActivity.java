@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mytestapplication.alarms.AlarmHelper;
+import com.example.mytestapplication.alarms.CheckStockBroadcastReceiver;
 import com.example.mytestapplication.stocks.Stock;
 
 import java.util.Calendar;
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        alarmHelper = new AlarmHelper(getApplicationContext());
+        alarmHelper = new AlarmHelper();
     }
 
     /*public void openSettings(View view) {
@@ -39,14 +40,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }*/
 
-    public void startService(View view) {
-        alarmHelper.setAlarm();
+    public void startService(View view) throws ClassNotFoundException {
+        alarmHelper.setAlarm(getApplicationContext());
         Toast.makeText(this, "Alarm started", Toast.LENGTH_LONG).show();
     }
 
-    public void stopService(View view) {
+    public void stopService(View view) throws ClassNotFoundException {
         // Stop alarms
-        alarmHelper.stopAlarm();
+        alarmHelper.stopAlarm(getApplicationContext());
         Toast.makeText(this, "Alarm stopped", Toast.LENGTH_LONG).show();
         // Clear shared preferences
     }
@@ -75,5 +76,10 @@ public class MainActivity extends AppCompatActivity {
             stockValue = "Exception when trying to get stock value";
         }
         textView.setText("MNZS price = " + stockValue);
+    }
+
+    public void checkStockAndNotify(View view) {
+        CheckStockBroadcastReceiver checkStockBroadcastReceiver = new CheckStockBroadcastReceiver();
+        checkStockBroadcastReceiver.checkStockAndNotify(getApplicationContext());
     }
 }

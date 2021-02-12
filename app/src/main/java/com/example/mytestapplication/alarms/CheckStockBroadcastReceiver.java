@@ -7,23 +7,27 @@ import android.content.Intent;
 import com.example.mytestapplication.notifications.Notifier;
 import com.example.mytestapplication.stocks.Stock;
 
-public class CheckStockAlarm extends BroadcastReceiver {
+public class CheckStockBroadcastReceiver extends BroadcastReceiver {
 
     private static final String STOCK_CODE  = "MNZS";
     private static final double MIN_STOCK_PRICE = 200.0;
     private final Stock mnzsStock = new Stock(STOCK_CODE);
+    private static final AlarmHelper alarmHelper = new AlarmHelper();
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        String displayText;
         // Set a new copy of this alarm to trigger after set interval.
-        AlarmHelper alarmHelper = new AlarmHelper(context);
-        alarmHelper.setAlarm();
+        //AlarmHelper alarmHelper = new AlarmHelper(context);
+        try {
+            alarmHelper.setAlarm(context);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
-        checkStock(context);
+        checkStockAndNotify(context);
     }
 
-    public void checkStock(Context context) {
+    public void checkStockAndNotify(Context context) {
         try {
             mnzsStock.refreshStockData();
             double stockPrice = mnzsStock.getPrice();
