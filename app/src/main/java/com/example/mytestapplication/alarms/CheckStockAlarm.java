@@ -19,12 +19,16 @@ public class CheckStockAlarm extends BroadcastReceiver {
         // Set a new copy of this alarm to trigger after set interval.
         AlarmHelper alarmHelper = new AlarmHelper(context);
         alarmHelper.setAlarm();
+
+        checkStock(context);
+    }
+
+    public void checkStock(Context context) {
         try {
             mnzsStock.refreshStockData();
-
             double stockPrice = mnzsStock.getPrice();
             if (stockPrice > MIN_STOCK_PRICE) {
-                displayText = String.valueOf(mnzsStock.getPrice());
+                String displayText = String.valueOf(mnzsStock.getPrice());
 
                 Notifier notifier = new Notifier(context);
                 notifier.notify(displayText);

@@ -4,6 +4,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.test.mock.MockContext;
 
 import androidx.test.core.app.ApplicationProvider;
 
@@ -34,6 +35,10 @@ public class CheckStockAlarmTest {
 
     @Test
     public void testOnReceive() {
+        // Check there are no notifications.
+        int preNotifs = shadowNotificationManager.getAllNotifications().size();
+        assertEquals(0, preNotifs);
+
         CheckStockAlarm checkStockAlarm = new CheckStockAlarm();
         Intent intent = new Intent(CHECK_STOCK_ALARM);
         checkStockAlarm.onReceive(context, intent);
@@ -47,5 +52,16 @@ public class CheckStockAlarmTest {
         // Check there was a notification
         int postNotifs = shadowNotificationManager.getAllNotifications().size();
         assertEquals(1, postNotifs);
+    }
+
+    @Test
+    public void testWithMockContext() {
+        MockContext mockContext = new MockContext();
+        //mockContext.
+    }
+
+    @Test
+    public void testCheckStock() {
+
     }
 }

@@ -1,11 +1,12 @@
 package com.example.mytestapplication.stocks;
 
+import com.example.mytestapplication.jsoup.JsoupWrapper;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.IOException;
 
 public class Stock {
 
@@ -17,14 +18,21 @@ public class Stock {
     private Double price;
     private String priceDiff;
     private String dateTime;
+    private JsoupWrapper jsoupWrapper;
 
     public Stock(String stockCode) {
+        this.jsoupWrapper = new JsoupWrapper();
+        this.stockCode = stockCode;
+    }
+
+    public Stock(String stockCode, JsoupWrapper jsoupWrapper) {
+        this.jsoupWrapper = jsoupWrapper;
         this.stockCode = stockCode;
     }
 
     public void refreshStockData() throws Exception {
-        System.out.println("Connecting to " + SHARE_PRICE_URL_PREFIX + this.stockCode);
-        Document doc = Jsoup.connect(SHARE_PRICE_URL_PREFIX + this.stockCode).get();
+        //System.out.println("Connecting to " + SHARE_PRICE_URL_PREFIX + this.stockCode);
+        Document doc = jsoupWrapper.get(SHARE_PRICE_URL_PREFIX + this.stockCode);
         setPrice(doc);
         setPriceDiff(doc);
         setDateTime(doc);
