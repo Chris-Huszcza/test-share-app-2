@@ -1,0 +1,4 @@
+Ideas
+ * Calculator for stock profit - between given buy and sell prices, given commission and tax
+ * Offline service running on desktop - get stock data
+ * Track stocks average value, recent peaks, recent lows

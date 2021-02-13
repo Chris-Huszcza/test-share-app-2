@@ -1,5 +1,7 @@
 package com.example.mytestapplication.schedulers;
 
+import com.example.mytestapplication.data.Config;
+
 import java.util.Calendar;
 
 /**
@@ -26,7 +28,10 @@ public class Scheduler {
     public Calendar getNextEventTime(Calendar baseTime) {
         this.time = baseTime;
         Calendar newTime = (Calendar) baseTime.clone();
-        // Apply interval.
+        if (Config.TEST_MODE) {
+            newTime.add(Calendar.MINUTE, 1);
+            return newTime;
+        }
         newTime.add(this.schedulerConfig.getInterval().getTimeUnit(),
                 this.schedulerConfig.getInterval().getAmount());
         // If new time is outside time limits, set to startTime of next applicable day
@@ -43,14 +48,14 @@ public class Scheduler {
     }
 
     private boolean isBeforeStartTime(Calendar timeToCheck) {
-        Calendar startTimeToday = this.time;
+        Calendar startTimeToday = (Calendar) this.time.clone();
         startTimeToday.set(Calendar.HOUR_OF_DAY, schedulerConfig.getStartTime().getHour());
         startTimeToday.set(Calendar.MINUTE, schedulerConfig.getStartTime().getMinute());
         return timeToCheck.before(startTimeToday);
     }
 
     private boolean isAfterEndTime(Calendar timeToCheck) {
-        Calendar endTimeToday = this.time;
+        Calendar endTimeToday = (Calendar) this.time.clone();
         endTimeToday.set(Calendar.HOUR_OF_DAY, schedulerConfig.getEndTime().getHour());
         endTimeToday.set(Calendar.MINUTE, schedulerConfig.getEndTime().getMinute());
         return timeToCheck.after(endTimeToday);
